@@ -33,14 +33,7 @@ module.exports = function(grunt) {
         'spec/**/*.js'
       ],
       options: {
-        // options here to override JSHint defaults
-        force: true,
-        globals: {
-          jQuery: true,
-          console: true,
-          module: true,
-          document: true
-        }
+        jshintrc: '.jshintrc'
       }
     },
 
