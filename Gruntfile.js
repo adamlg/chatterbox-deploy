@@ -50,7 +50,7 @@ module.exports = function(grunt) {
           keepSpecialComments: 0
         },
         files: {
-          'dist/style.min.css': 'public/style.css'
+          'public/dist/style.min.css': 'public/style.css'
         }
       }
     },
