@@ -12,6 +12,12 @@ module.exports = function(grunt) {
       }
     },
 
+    nodemon: {
+      dev: {
+        script: 'server.js'
+      }
+    },
+
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
@@ -33,6 +39,7 @@ module.exports = function(grunt) {
         'spec/**/*.js'
       ],
       options: {
+        force: 'true',
         jshintrc: '.jshintrc'
       }
     },
@@ -49,13 +56,25 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint']
+      scripts: {
+        files: [
+          'public/client/**/*.js',
+          'public/lib/**/*.js',
+        ],
+        tasks: [
+          'concat',
+          'uglify'
+        ]
+      },
+      css: {
+        files: 'public/*.css',
+        tasks: ['cssmin']
+      }
     },
 
     shell: {
       localServer: {
-        command: 'nodemon',
+        command: 'node server.js',
         options: {
           stdout: true
         }
@@ -77,6 +96,21 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-nodemon');
+
+  grunt.registerTask('server-dev', function (target) {
+    // Running nodejs in a different process and displaying output on the main console
+    var nodemon = grunt.util.spawn({
+         cmd: 'grunt',
+         grunt: true,
+         args: 'nodemon'
+    });
+    nodemon.stdout.pipe(process.stdout);
+    nodemon.stderr.pipe(process.stderr);
+
+    grunt.task.run([ 'watch' ]);
+
+  });
 
   grunt.registerTask('test', [
     'jshint'
@@ -86,7 +120,7 @@ module.exports = function(grunt) {
     'jshint',
     'concat',
     'uglify',
-    'shell:localServer'
+    'server-dev'
   ]);
 
   grunt.registerTask('build-prod', [
