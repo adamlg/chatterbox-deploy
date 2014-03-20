@@ -116,6 +116,12 @@ module.exports = function(grunt) {
     'jshint'
   ]);
 
+  grunt.registerTask('build', [
+    'concat',
+    'uglify',
+    'cssmin'
+  ]);
+
   grunt.registerTask('build-dev', [
     'jshint',
     'concat',
@@ -126,7 +132,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build-prod', [
     'jshint',
     'concat',
-    'cssmin:prod',
+    'cssmin',
     'uglify',
     'shell:prodServer'
   ]);
