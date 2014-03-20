@@ -12,6 +12,15 @@ module.exports = function(grunt) {
       }
     },
 
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['spec/**/*Spec.js']
+      }
+    },
+
     nodemon: {
       dev: {
         script: 'server.js'
@@ -95,6 +104,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
 
@@ -112,9 +122,19 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.registerTask('test', [
-    'jshint'
-  ]);
+  grunt.registerTask('test', function (target) {
+    // Running nodejs in a different process and displaying output on the main console
+    var nodemon = grunt.util.spawn({
+         cmd: 'grunt',
+         grunt: true,
+         args: 'nodemon'
+    });
+    nodemon.stdout.pipe(process.stdout);
+    nodemon.stderr.pipe(process.stderr);
+
+    grunt.task.run([ 'mochaTest' ]);
+
+  });
 
   grunt.registerTask('build', [
     'concat',
@@ -126,7 +146,8 @@ module.exports = function(grunt) {
     'jshint',
     'concat',
     'uglify',
-    'server-dev'
+    'server-dev',
+    'watch'
   ]);
 
   grunt.registerTask('build-prod', [
