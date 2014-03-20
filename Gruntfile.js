@@ -50,7 +50,7 @@ module.exports = function(grunt) {
           keepSpecialComments: 0
         },
         files: {
-          'public/style.min.css': 'public/style.css'
+          'dist/style.min.css': 'public/style.css'
         }
       }
     },
@@ -70,10 +70,12 @@ module.exports = function(grunt) {
       prodServer: {
         command: 'git push azure master',
         options: {
-          stdout: true
+          stdout: true,
+          stderr: true,
+          failOnError: true
         }
       }
-    }
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');

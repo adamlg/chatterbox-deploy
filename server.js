@@ -47,11 +47,11 @@ app.get('/create', function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-  res.render('dist/shortly-express');
+  res.render('dist/shortly-express.min');
 });
 
 app.get('/create', function(req, res) {
-  res.render('dist/shortly-express');
+  res.render('dist/shortly-express.min');
 });
 
 app.get('/links', function(req, res) {
