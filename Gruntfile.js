@@ -152,9 +152,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build-prod', [
     'jshint',
-    'concat',
-    'cssmin',
-    'uglify',
     'shell:prodServer'
   ]);
 
