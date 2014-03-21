@@ -1,11 +1,15 @@
 var db = require('../config');
-var Clicks = require('./click');
+var mongoose = require('mongoose');
 
-var Link = db.Model.extend({
-  tableName: 'urls',
-  clicks: function() {
-    return this.hasMany(Click);
-  }
+var linkSchema = mongoose.Schema({
+ visits: Number,
+ link: String,
+ title: String,
+ code: String,
+ base_url: String,
+ url: String
 });
+
+var Link = mongoose.model('Link', linkSchema);
 
 module.exports = Link;
