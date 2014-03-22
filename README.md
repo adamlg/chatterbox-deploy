@@ -48,7 +48,7 @@ Refactor your database
 ======================
 In the previous sprint, our shortened links were stored using sqlite, a server-less database engine. Sqlite is great for development, but it's not suited for production sites for [various reasons](http://stackoverflow.com/questions/913067/sqlite-as-a-production-database-for-a-low-traffic-site).
 * [ ] Refactor the app to use MongoDB/Mongoose, and run it locally
-* [ ] Host a Mongo instance on Azure
+* [ ] Host a Mongo instance on [Azure](http://www.windowsazure.com/en-us/documentation/articles/store-mongolab-web-sites-nodejs-store-data-mongodb/)
 * [ ] Refactor your database code to handle both enviroments--if you're running it locally, it should connect to a local database, and when you navigate to your deployed site, it should connect to your hosted Mongo instance
 todo:// notes from above
 
