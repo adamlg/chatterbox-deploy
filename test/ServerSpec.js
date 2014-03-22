@@ -14,7 +14,7 @@ describe('', function() {
       console.log('logging out');
     });
 
-    // delete link for roflzoo from db so it can be created later for the test
+    // delete objects from db so they can be created later for the test
     Link.remove({title : 'Rofl Zoo - Daily funny animal pictures'}).exec();
     User.remove({username : 'Savannah'}).exec();
     User.remove({username : 'Phillip'}).exec();
@@ -57,7 +57,6 @@ describe('', function() {
         if (err){
           console.log(error);
         }
-        console.log('link found', link);
         expect(link.url).to.equal('http://www.roflzoo.com/');
         done();
       });
@@ -71,7 +70,6 @@ describe('', function() {
           console.log(err);
         }
         if (link){
-          console.log('heeyy',link);
           foundTitle = link.title;          
         }
         expect(foundTitle).to.equal('Rofl Zoo - Daily funny animal pictures');
@@ -83,10 +81,7 @@ describe('', function() {
     var firstCode, secondCode;
     Link.findOne({'url':'http://www.roflzoo.com'})
       .exec(function(err,link) {
-
-        console.log('liiiiiink',link);
         firstCode = link.code;
-
         var options = {
           'method': 'POST',
           'uri': 'http://127.0.0.1:4568/links',
@@ -96,7 +91,6 @@ describe('', function() {
         };
 
         request(options, function(error, res, body) {
-          console.log('\n\n\n\n\n\n\n\n\n\n\n\n\n\nresbodyshortened', res.body);
           secondCode = res.body.code;
           expect(secondCode).to.equal(firstCode);
           done();
@@ -110,14 +104,13 @@ describe('', function() {
       Link.findOne({'title': 'Rofl Zoo - Daily funny animal pictures'})
       .exec(function(err,link) {
         var sha = link.code;
-        var options = {
+        var options = { 
           'method': 'GET',
           'uri': 'http://127.0.0.1:4568/' + sha,
           'timeout': 5000
         };
 
         request(options, function(error, res, body) {
-          console.log('res',res.request.href)
           var currentLocation = res.request.href;
           expect(currentLocation).to.equal('http://www.roflzoo.com/');
           done();
