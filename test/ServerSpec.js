@@ -2,9 +2,9 @@ var expect = require('chai').expect;
 var request = require('request');
 
 var db = require('../app/config');
-var Users = require('../app/collections/users');
+// var Users = require('../app/collec/tions/users');
 var User = require('../app/models/user');
-var Links = require('../app/collections/links');
+// var Links = require('../app/collections/links');
 var Link = require('../app/models/link');
 
 describe('', function() {
@@ -14,38 +14,10 @@ describe('', function() {
       console.log('logging out');
     });
 
-    // delete link for roflzoo from db so it can be created later for the test
-    db.knex('urls')
-      .where('title', '=', 'Rofl Zoo - Daily funny animal pictures')
-      .del()
-      .catch(function(error) {
-        throw {
-          type: 'DatabaseError',
-          message: 'Failed to create test setup data'
-        };
-      });
-
-    // delete user Svnh from db so it can be created later for the test
-    db.knex('users')
-      .where('username', '=', 'Svnh')
-      .del()
-      .catch(function(error) {
-        throw {
-          type: 'DatabaseError',
-          message: 'Failed to create test setup data'
-        };
-      });
-
-    // delete user Phillip from db so it can be created later for the test
-    db.knex('users')
-      .where('username', '=', 'Phillip')
-      .del()
-      .catch(function(error) {
-        throw {
-          type: 'DatabaseError',
-          message: 'Failed to create test setup data'
-        };
-      });
+    // delete objects from db so they can be created later for the test
+    Link.remove({title : 'Rofl Zoo - Daily funny animal pictures'}).exec();
+    User.remove({username : 'Savannah'}).exec();
+    User.remove({username : 'Phillip'}).exec();
   });
 
   it('Shortens links', function(done) {
@@ -78,42 +50,38 @@ describe('', function() {
     });
   });
 
+
   it('New links create a database entry', function(done) {
-    var foundUrl;
-    db.knex('urls')
-      .where('url', '=', 'http://www.roflzoo.com/')
-      .then(function(urls) {
-        if (urls['0'] && urls['0']['url']) {
-          foundUrl = urls['0']['url'];
+    Link.findOne({'url' : 'http://www.roflzoo.com/'})
+      .exec(function(err,link){
+        if (err){
+          console.log(error);
         }
-        // TODO: why is there a timeout on fail?
-        expect(foundUrl).to.equal('http://www.roflzoo.com/');
+        expect(link.url).to.equal('http://www.roflzoo.com/');
         done();
       });
   });
 
   it('Fetches the link url title', function (done) {
     var foundTitle;
-    db.knex('urls')
-      .where('title', '=', 'Rofl Zoo - Daily funny animal pictures')
-      .then(function(urls) {
-        if (urls['0'] && urls['0']['title']) {
-          foundTitle = urls['0']['title'];
+    Link.findOne({'url':'http://www.roflzoo.com'})
+      .exec(function(err,link) {
+        if (err){
+          console.log(err);
         }
-        // TODO: why is there a timeout on fail?
+        if (link){
+          foundTitle = link.title;          
+        }
         expect(foundTitle).to.equal('Rofl Zoo - Daily funny animal pictures');
         done();
       });
   });
 
   it('Returns the same shortened code if attempted to add the same URL twice', function(done) {
-    var firstCode;
-    db.knex('urls')
-      .where('title', '=', 'Rofl Zoo - Daily funny animal pictures')
-      .then(function(urls) {
-        if (urls['0'] && urls['0']['code']) {
-          firstCode = urls['0']['code'];
-        }
+    var firstCode, secondCode;
+    Link.findOne({'url':'http://www.roflzoo.com'})
+      .exec(function(err,link) {
+        firstCode = link.code;
         var options = {
           'method': 'POST',
           'uri': 'http://127.0.0.1:4568/links',
@@ -123,7 +91,7 @@ describe('', function() {
         };
 
         request(options, function(error, res, body) {
-          var secondCode = res.body.code;
+          secondCode = res.body.code;
           expect(secondCode).to.equal(firstCode);
           done();
         });
@@ -132,13 +100,11 @@ describe('', function() {
 
   it('Shortcode redirects to correct url', function(done) {
     this.timeout(5000);
-    db.knex('urls')
-      .where('title', '=', 'Rofl Zoo - Daily funny animal pictures')
-      .then(function(urls) {
-        if (urls['0'] && urls['0']['code']) {
-          var sha = urls['0']['code'];
-        }
-        var options = {
+    //TOSAVANNAH: wat?
+      Link.findOne({'title': 'Rofl Zoo - Daily funny animal pictures'})
+      .exec(function(err,link) {
+        var sha = link.code;
+        var options = { 
           'method': 'GET',
           'uri': 'http://127.0.0.1:4568/' + sha,
           'timeout': 5000
@@ -149,11 +115,12 @@ describe('', function() {
           expect(currentLocation).to.equal('http://www.roflzoo.com/');
           done();
         });
-    });
+      });
   });
 
-  /*  Authentication  */
-  // TODO: xit out authentication
+
+  // /*  Authentication  */
+  // // TODO: xit out authentication
   it('Redirects to login page if a user tries to access the main page and is not signed in', function(done) {
     request('http://127.0.0.1:4568/', function(error, res, body) {
       expect(res.req.path).to.equal('/login');
@@ -186,19 +153,11 @@ describe('', function() {
     };
 
     request(options, function(error, res, body) {
-      db.knex('users')
-        .where('username', '=', 'Svnh')
-        .then(function(res) {
-          if (res[0] && res[0]['username']) {
-            var user = res[0]['username'];
-          }
-          expect(user).to.equal('Svnh');
+
+        User.findOne({'username': 'Svnh'})
+        .exec(function(err,user) {
+          expect(user.username).to.equal('Svnh');
           done();
-        }).catch(function(err) {
-          throw {
-            type: 'DatabaseError',
-            message: 'Failed to create test setup data'
-          };
         });
     });
   });
@@ -237,7 +196,7 @@ describe('', function() {
     });
   });
 
-  // TODO: What should I do to test for all links? This sends back a string.
+  // // TODO: What should I do to test for all links? This sends back a string.
   it('Returns all of the links to display on the links page', function(done) {
     var options = {
       'method': 'POST',
@@ -274,5 +233,4 @@ describe('', function() {
       done();
     });
   });
-
 });

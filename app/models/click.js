@@ -1,11 +1,11 @@
-var db = require('../config');
-var Link = require('./link.js')
+// var db = require('../config');
+// var Link = require('./link.js')
 
-var Click = db.Model.extend({
-  tableName: 'clicks',
-  link: function() {
-    return this.belongsTo(Link, 'link_id');
-  }
-});
+// var Click = db.Model.extend({
+//   tableName: 'clicks',
+//   link: function() {
+//     return this.belongsTo(Link, 'link_id');
+//   }
+// });
 
-module.exports = Click;
+// module.exports = Click;
