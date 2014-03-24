@@ -17,7 +17,7 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['spec/**/*Spec.js']
+        src: ['test/**/*.js']
       }
     },
 
@@ -49,7 +49,11 @@ module.exports = function(grunt) {
       ],
       options: {
         force: 'true',
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
+        ignores: [
+          'public/lib/**/*.js',
+          'public/dist/**/*.js'
+        ]
       }
     },
 
@@ -82,12 +86,6 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      localServer: {
-        command: 'node server.js',
-        options: {
-          stdout: true
-        }
-      },
       prodServer: {
         command: 'git push azure master',
         options: {
@@ -133,7 +131,6 @@ module.exports = function(grunt) {
     nodemon.stderr.pipe(process.stderr);
 
     grunt.task.run([ 'mochaTest' ]);
-
   });
 
   grunt.registerTask('build', [
@@ -143,15 +140,12 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build-dev', [
-    'jshint',
-    'concat',
-    'uglify',
-    'server-dev',
-    'watch'
+    'build',
+    'server-dev'
   ]);
 
   grunt.registerTask('build-prod', [
-    'jshint',
+    'build',
     'shell:prodServer'
   ]);
 
