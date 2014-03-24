@@ -120,18 +120,10 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.registerTask('test', function (target) {
-    // Running nodejs in a different process and displaying output on the main console
-    var nodemon = grunt.util.spawn({
-         cmd: 'grunt',
-         grunt: true,
-         args: 'nodemon'
-    });
-    nodemon.stdout.pipe(process.stdout);
-    nodemon.stderr.pipe(process.stderr);
-
-    grunt.task.run([ 'mochaTest' ]);
-  });
+  grunt.registerTask('test', [
+    'jshint',
+    'mochaTest'
+  ]);
 
   grunt.registerTask('build', [
     'concat',
@@ -140,11 +132,13 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build-dev', [
+    'test',
     'build',
     'server-dev'
   ]);
 
   grunt.registerTask('build-prod', [
+    'test',
     'build',
     'shell:prodServer'
   ]);
