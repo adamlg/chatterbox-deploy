@@ -72,7 +72,7 @@ app.post('/links', function(req, res) {
           }
         });
       })
-    };
+    }
   });
 });
 
