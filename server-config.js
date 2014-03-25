@@ -143,6 +143,7 @@ app.get('/*', function(req, res) {
     } else {
       link.visits++;
       link.save(function(err,link){
+        if(err){ console.log('LINK SAVE ERROR: ', err); }
         res.redirect(link.url);
         return;
       })
