@@ -40,7 +40,6 @@ app.get('/create', checkUser, function(req, res) {
 
 app.get('/links', checkUser, function(req, res) {
   Link.find({}).exec(function(err,links) {
-    console.log('links')
     res.send(200, links);
   })
 });
@@ -62,30 +61,17 @@ app.post('/links', function(req, res) {
           console.log('Error reading URL heading: ', err);
           return res.send(404);
         }
-        var sha = util.createSha(uri);
         var newLink = new Link({
           url: uri,
           title: title,
-          code: sha,
           base_url: req.headers.origin,
           visits: 0
         });
+
         newLink.save(function(err,newEntry) {
           if (err) {
             res.send(500, err);
           } else {
-            console.log('newEntry',newEntry);
-            app.get('/' + sha, function(req, res){
-              console.log('sha',sha,'req', req.body);
-              Link.findOne({ code: sha}).exec(function(err, entry) {
-                console.log('1', entry);
-                entry.visits = entry.visits += 1;
-                entry.save(function(entry){
-                  console.log(entry);
-                });
-                res.redirect(entry.url);
-              })
-            })
             res.send(200,newEntry);
           }
         });
@@ -108,8 +94,8 @@ app.post('/login', function(req, res) {
       if (!user) {
         res.redirect('/login');
       } else {
-        var userPassword = user.password;
-        util.comparePassword(password, userPassword, function(err, match) {
+        var savedPassword = user.password;
+        User.comparePassword(password, savedPassword, function(err, match) {
           if (match) {
             util.createSession(app, req, res, user);
           } else {
@@ -137,23 +123,35 @@ app.post('/signup', function(req, res) {
   User.findOne({ username: username })
     .exec(function(err, user) {
       if (!user) {
-        util.hashPassword(password, function(hashedPassword) {
-          var newUser = new User({
-            username: username,
-            password: hashedPassword
-          });
-          newUser.save(function(err, newUser) {
-            if (err) {
-              res.send(500, err);
-            }
-            util.createSession(app, req, res, newUser);
-          });
+        var newUser = new User({
+          username: username,
+          password: password
+        });
+        newUser.save(function(err, newUser) {
+          if (err) {
+            res.send(500, err);
+          }
+          util.createSession(app, req, res, newUser);
         });
       } else {
         console.log('Account already exists');
         res.redirect('/signup');
       }
     });
+});
+
+app.get('/*', function(req, res) {
+  Link.findOne({ code: req.params[0] }).exec(function(err,link) {
+    if (!link) {
+      res.redirect('/');
+    } else {
+      link.visits++;
+      link.save(function(err,link){
+        res.redirect(link.url);
+        return;
+      })
+    }
+  });
 });
 
 var port = process.env.PORT || 4568;
