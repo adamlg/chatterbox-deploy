@@ -3,13 +3,11 @@ shortly-deploy
 
 In this sprint, you will learn about deployment and various build tools. The tools and techniques you gain experience with here will allow you to kick off your group project with a bang.
 
-Orientation
-===========
+### Orientation
 
 We're giving you a canonical version of the Shortly-express repo to start with. Before diving in, do a code review. Take a few minutes with your partner and compare this canonical repo to your work from the last sprint. How was your app architected differently? Could your code be DRYer, or was it well organized? Are there any functional differences between the apps? You can often learn as much from reading code as you can from writing it.
 
-Basic requirements
-====================
+### Basic requirements
 
 - Get your code ready for deployment
  * [ ] Liberate your repo
@@ -38,8 +36,7 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 * [ ] Refactor your database code to handle both enviroments--if you're running the app locally, it should connect to a local database, and when you navigate to your deployed site, it should connect to your hosted Mongo instance
 
 
-Extra Credit
-=====================
+### Extra Credit
 
 - Refactor `server.js` to use promises
 * [ ] Several routes in the server use nested callbacks. Refactor them all to use promises. Consider using[Bluebird](https://github.com/petkaantonov/bluebird), a popular and performant promise library.
@@ -54,8 +51,7 @@ Extra Credit
 - Use another service
  * [ ] Deploy your site to another service (Heroku, AWS)
 
- Nightmare Mode
- =======================
+### Nightmare Mode
 
  * [ ] Figure out how to push your latest build to the CDN
  * [ ] Refactor all HTML & templates to use correct paths to the CDN
