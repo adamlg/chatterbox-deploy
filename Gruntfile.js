@@ -131,16 +131,18 @@ module.exports = function(grunt) {
     'cssmin'
   ]);
 
-  grunt.registerTask('build-dev', [
+  grunt.registerTask('deploy', [
     'test',
     'build',
-    'server-dev'
+    'upload'
   ]);
 
-  grunt.registerTask('build-prod', [
-    'test',
-    'build',
-    'shell:prodServer'
-  ]);
+  grunt.registerTask('upload', function(n) {
+    if(grunt.option('prod')) {
+      grunt.task.run([ 'shell:prodServer' ]);
+    } else {
+      grunt.task.run([ 'server-dev' ]);
+    }
+  });
 
 };
