@@ -44,8 +44,6 @@ Extra Credit
 Use promises.
 * [ ] Several routes in the server use nested callbacks. Refactor them all to use promises. Consider using[Bluebird](https://github.com/petkaantonov/bluebird), a popular and performant promise library.
 
-More Grunt! 
-
 Incorprate images in your shortened links
  * [ ] Find an image used on the site of the original url and use that instead of an icon (hint: use a regular expression or a [parser](http://stackoverflow.com/questions/7977945/html-parser-on-nodejs) to analyze the document)
 
@@ -61,5 +59,5 @@ Use another service
 
  * [ ] Figure out how to push your latest build to the CDN
  * [ ] Refactor all HTML & templates to use correct paths to the CDN
- * [ ] Version your cdn build & manage [expiration](http://msdn.microsoft.com/en-us/library/gg680306.aspx) of the files you store
+ * [ ] Version your CDN build & manage [expiration](http://msdn.microsoft.com/en-us/library/gg680306.aspx) of the files you store
  * [ ] Store saved images in the CDN (this might be very difficult)
