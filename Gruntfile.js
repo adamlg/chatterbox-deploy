@@ -17,7 +17,7 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['spec/**/*Spec.js']
+        src: ['test/**/*.js']
       }
     },
 
@@ -49,7 +49,11 @@ module.exports = function(grunt) {
       ],
       options: {
         force: 'true',
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
+        ignores: [
+          'public/lib/**/*.js',
+          'public/dist/**/*.js'
+        ]
       }
     },
 
@@ -82,12 +86,6 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      localServer: {
-        command: 'node server.js',
-        options: {
-          stdout: true
-        }
-      },
       prodServer: {
         command: 'git push azure master',
         options: {
@@ -122,19 +120,10 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.registerTask('test', function (target) {
-    // Running nodejs in a different process and displaying output on the main console
-    var nodemon = grunt.util.spawn({
-         cmd: 'grunt',
-         grunt: true,
-         args: 'nodemon'
-    });
-    nodemon.stdout.pipe(process.stdout);
-    nodemon.stderr.pipe(process.stderr);
-
-    grunt.task.run([ 'mochaTest' ]);
-
-  });
+  grunt.registerTask('test', [
+    'jshint',
+    'mochaTest'
+  ]);
 
   grunt.registerTask('build', [
     'concat',
@@ -143,15 +132,14 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build-dev', [
-    'jshint',
-    'concat',
-    'uglify',
-    'server-dev',
-    'watch'
+    'test',
+    'build',
+    'server-dev'
   ]);
 
   grunt.registerTask('build-prod', [
-    'jshint',
+    'test',
+    'build',
     'shell:prodServer'
   ]);
 
