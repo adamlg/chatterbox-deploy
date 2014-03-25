@@ -9,17 +9,6 @@ var User = require('../app/models/user');
 var Links = require('../app/collections/links');
 var Link = require('../app/models/link');
 
-/************************************************************/
-// Mocha doesn't have a way to designate pending before blocks.
-// Mimic the behavior of xit and xdescribe with xbeforeEach.
-// Swap the commented lines or remove the 'x' from beforeEach
-// when working on authentication tests.
-/************************************************************/
-//var xbeforeEach = beforeEach;
-var xbeforeEach = function(){};
-/************************************************************/
-
-
 
 
 describe('', function() {
