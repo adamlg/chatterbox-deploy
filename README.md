@@ -12,7 +12,7 @@ We're giving you a canonical version of the Shortly-express repo to start with. 
 - Get your code ready for deployment
  * [ ] Liberate your repo
 
-- Set up a server with Azure:
+- Set up a server using Azure
  * [ ] Use the Azure command line tools to provision and configure a 'production' server
 
 - Reconfigure your app to work in both evironments
@@ -39,7 +39,7 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 ### Extra Credit
 
 - Refactor `server.js` to use promises
-* [ ] Several routes in the server use nested callbacks. Refactor them all to use promises. Consider using[Bluebird](https://github.com/petkaantonov/bluebird), a popular and performant promise library.
+  * [ ] Several routes in the server use nested callbacks. Refactor them all to use promises. Consider using[Bluebird](https://github.com/petkaantonov/bluebird), a popular and performant promise library.
 
 - Incorprate images in your shortened links
  * [ ] Find an image used on the site of the original url and use that instead of an icon (hint: use a regular expression or a [parser](http://stackoverflow.com/questions/7977945/html-parser-on-nodejs) to analyze the document)
@@ -53,7 +53,7 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 
 ### Nightmare Mode
 
- * [ ] Figure out how to push your latest build to the CDN
- * [ ] Refactor all HTML & templates to use correct paths to the CDN
- * [ ] Version your CDN build & manage [expiration](http://msdn.microsoft.com/en-us/library/gg680306.aspx) of the files you store
- * [ ] Store saved images in the CDN (this might be very difficult)
+  * [ ] Figure out how to push your latest build to the CDN
+  * [ ] Refactor all HTML & templates to use correct paths to the CDN
+  * [ ] Version your CDN build & manage [expiration](http://msdn.microsoft.com/en-us/library/gg680306.aspx)  of the files you store
+  * [ ] Store saved images in the CDN (this might be very difficult)
