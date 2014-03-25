@@ -23,6 +23,7 @@ We're giving you a canonical version of the Shortly-express repo to start with. 
  * [ ] Read about [how to use node modules](http://www.windowsazure.com/en-us/documentation/articles/nodejs-use-node-modules-windows-azure-apps/) with Azure. Make any necessary changes.
 
 - Create a Gruntfile
+Building and deploying an app involves a number of important tasks that need to be performed in a certain order. When you're trying to rapidly prototype your app, this can become repetitive and is prone to error. Grunt is a super useful tool that can automate a wide variety of tasks for you. Let Grunt do the work!
  * [ ] Use [Grunt](http://gruntjs.com/) to create a build script
  * [ ] Uglify your code using Grunt before deployment
  * [ ] Concatenate files before deployment
