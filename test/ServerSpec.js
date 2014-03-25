@@ -72,9 +72,9 @@ describe('', function() {
       });
   });
 
-  it('Fetches the link url title', function (done) {
+  it('Fetches the link url title', function(done) {
     var foundTitle;
-    Link.findOne({'url':'http://www.roflzoo.com'})
+    Link.findOne({'url' : 'http://www.roflzoo.com/'})
       .exec(function(err,link) {
         if (err){
           console.log(err);
@@ -89,7 +89,7 @@ describe('', function() {
 
   it('Returns the same shortened code if attempted to add the same URL twice', function(done) {
     var firstCode, secondCode;
-    Link.findOne({'url':'http://www.roflzoo.com'})
+    Link.findOne({'url':'http://www.roflzoo.com/'})
       .exec(function(err,link) {
         firstCode = link.code;
         request(app)
@@ -112,20 +112,20 @@ describe('', function() {
     this.timeout(5000);
     //TOSAVANNAH: wat? LOLZ.
       Link.findOne({'title': 'Rofl Zoo - Daily funny animal pictures'})
-      .exec(function(err,link) {
-        var sha = link.code;
-        request(app)
-          .get('/' + sha)
-          .expect(302)
-          .expect(function(res) {
-            var currentLocation = res.request.href;
-            expect(currentLocation).to.equal('http://www.roflzoo.com/');
-          })
-          .end(function(err, res) {
-            if(err) return done(err);
-            done();
-          });
-      });
+        .exec(function(err,link) {
+          var sha = link.code;
+          request(app)
+            .get('/' + sha)
+            .expect(302)
+            .expect(function(res) {
+              var redirect = res.headers.location;
+              expect(redirect).to.equal('http://www.roflzoo.com/');
+            })
+            .end(function(err, res) {
+              if(err) return done(err);
+              done();
+            });
+        });
   });
 
 
@@ -175,16 +175,15 @@ describe('', function() {
       .post('/signup')
       .send({
         'username': 'Svnh',
-        'password': 'Svnh'
-      })
-      .expect(200)
-      .expect(function(res) {
+        'password': 'Svnh' })
+      .expect(302)
+      .expect(function() {
         User.findOne({'username': 'Svnh'})
-        .exec(function(err,user) {
-          expect(user.username).to.equal('Svnh');
-          done();
-        });
-      });
+          .exec(function(err,user) {
+            expect(user.username).to.equal('Svnh');
+          });
+      })
+      .end(done);
   });
 
   it('Successful signup logs in a new user', function(done) {
@@ -192,15 +191,15 @@ describe('', function() {
       .post('/signup')
       .send({
         'username': 'Phillip',
-        'password': 'Phillip'
-      })
-      .expect(200)
+        'password': 'Phillip' })
+      .expect(302)
       .expect(function(res) {
         expect(res.headers.location).to.equal('/');
         request(app)
           .get('/logout')
-          .end(done)
-      });
+          .expect(200)
+      })
+      .end(done);
   });
 
   it('Logs in existing users', function(done) {
@@ -208,8 +207,7 @@ describe('', function() {
       .post('/login')
       .send({
         'username': 'Phillip',
-        'password': 'Phillip'
-      })
+        'password': 'Phillip' })
       .expect(302)
       .expect(function(res) {
         expect(res.headers.location).to.equal('/');
@@ -219,24 +217,20 @@ describe('', function() {
 
   // // TODO: What should I do to test for all links? This sends back a string.
   it('Returns all of the links to display on the links page', function(done) {
-    var options = {
-      'method': 'POST',
-      'uri': 'http://127.0.0.1:4568/login',
-      'json': {
+    request(app)
+      .post('/login')
+      .send({
         'username': 'Phillip',
-        'password': 'Phillip'
-      }
-    };
-
-    // enable cookies for login information
-    xrequest = xrequest.defaults({jar: true});
-    xrequest(options, function(error, res, body) {
-      xrequest('http://127.0.0.1:4568/links', function(error, res, body) {
-        expect(body).to.include('"title": "Rofl Zoo - Daily funny animal pictures"');
-        done();
-      });
-    });
-
+        'password': 'Phillip' })
+      .expect(302)
+      .expect(function() {
+        request(app)
+          .get('/links')
+          .expect(function(res) {
+            expect(res.body).to.include('"title": "Rofl Zoo - Daily funny animal pictures"');
+          })
+      })
+      .end(done);
   });
 
   it('Users that do not exist are kept on login page', function(done) {
@@ -244,8 +238,7 @@ describe('', function() {
       .post('/login')
       .send({
         'username': 'Fred',
-        'password': 'Fred'
-      })
+        'password': 'Fred' })
       .expect(302)
       .expect(function(res) {
         expect(res.headers.location).to.equal('/login');
