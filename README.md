@@ -31,9 +31,9 @@ We're giving you a canonical version of the Shortly-express repo to start with. 
 
 - Refactor your database 
 In the previous sprint, our shortened links were stored using sqlite, a server-less database engine. Sqlite is great for development, but it's not well suited for well-trafficked production sites for [various reasons](http://stackoverflow.com/questions/913067/sqlite-as-a-production-database-for-a-low-traffic-site).
-* [ ] Refactor the app to use MongoDB/Mongoose, and run it locally
-* [ ] Host a Mongo instance on [Azure](http://www.windowsazure.com/en-us/documentation/articles/store-mongolab-web-sites-nodejs-store-data-mongodb/). *** Note: if you receive an error when trying to add MongoLab to your project, read the guide below ****
-* [ ] Refactor your database code to handle both enviroments--if you're running the app locally, it should connect to a local database, and when you navigate to your deployed site, it should connect to your hosted Mongo instance
+  * [ ] Refactor the app to use MongoDB/Mongoose, and run it locally
+  * [ ] Host a Mongo instance on [Azure](http://www.windowsazure.com/en-us/documentation/articles/store-mongolab-web-sites-nodejs-store-data-mongodb/). *** Note: if you receive an error when trying to add MongoLab to your project, read the guide below ****
+  * [ ] Refactor your database code to handle both enviroments--if you're running the app locally, it should connect to a local database, and when you navigate to your deployed site, it should connect to your hosted Mongo instance
 
 
 ### Extra Credit
