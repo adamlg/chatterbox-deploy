@@ -1,7 +1,6 @@
 var db = require('../config');
 var crypto = require('crypto')
 var mongoose = require('mongoose');
-// var Click = require('./click')
 
 var linkSchema = mongoose.Schema({
  visits: Number,
