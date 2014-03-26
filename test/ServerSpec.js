@@ -4,10 +4,17 @@ var expect = require('chai').expect;
 var app = require('../server-config.js');
 
 var db = require('../app/config');
+/* START SOLUTION */
+var User = require('../app/models/user.solution');
+var Link = require('../app/models/link.solution');
+/* ELSE
 var User = require('../app/models/user');
 var Link = require('../app/models/link');
+END SOLUTION */
 
-
+/////////////////////////////////////////////////////
+// NOTE: these tests are designed for mongo!
+/////////////////////////////////////////////////////
 
 /* START SOLUTION */
 describe /* ELSE
