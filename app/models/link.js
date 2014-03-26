@@ -1,5 +1,5 @@
 var db = require('../config');
-var crypto = require('crypto')
+var crypto = require('crypto');
 var mongoose = require('mongoose');
 
 var linkSchema = mongoose.Schema({
@@ -18,8 +18,6 @@ var createSha = function(url) {
   shasum.update(url);
   return shasum.digest('hex').slice(0, 5);
 };
-
-
 
 linkSchema.pre('save', function(next){
   var code = createSha(this.url);

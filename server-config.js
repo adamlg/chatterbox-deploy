@@ -128,7 +128,7 @@ var saveLink  = function(req, res) {
     }
   });
 };
-/* ELSE 
+/* ELSE
 
 var fetchLinks = function(req, res) {
   Links.reset().fetch().then(function(links) {
@@ -211,7 +211,7 @@ var loginUser = function(req, res) {
         })
       }
   });
-});
+};
 
 var createUser = function(req, res) {
   var username = req.body.username;
@@ -235,10 +235,55 @@ var createUser = function(req, res) {
         res.redirect('/signup');
       }
     })
-});
+};
+
+var saveLink = function(req, res) {
+  var uri = req.body.url;
+
+  if (!util.isValidUrl(uri)) {
+    console.log('Not a valid url: ', uri);
+    return res.send(404);
+  }
+
+  new Link({ url: uri }).fetch().then(function(found) {
+    if (found) {
+      res.send(200, found.attributes);
+    } else {
+      util.getUrlTitle(uri, function(err, title) {
+        if (err) {
+          console.log('Error reading URL heading: ', err);
+          return res.send(404);
+        }
+        var sha = util.createSha(uri);
+        var link = new Link({
+          url: uri,
+          title: title,
+          code: sha,
+          base_url: req.headers.origin,
+          visits: 0
+        });
+
+        var click = new Click({
+          url: uri,
+          createdAt: new Date(),
+          link_id: link.attributes.code
+        });
+
+        click.save().then(function () {
+
+          link.save().then(function(newLink) {
+            Links.add(newLink);
+            util.addShortenedUrlRedirect(app, link);
+            res.send(200, newLink);
+          });
+
+        });
+      });
+    }
+  });
+};
 END SOLUTION */
 
-<<<<<<< HEAD
 app.get('/', checkUser, function(req, res) {
   res.render('index');
 });
