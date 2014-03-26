@@ -1,8 +1,11 @@
-// var db = require('../config');
-// var Link = require('../models/link');
+/* START SOLUTION */
+/* ELSE
+var db = require('../config');
+var Link = require('../models/link');
 
-// var Links = new db.Collection();
+var Links = new db.Collection();
 
-// Links.model = Link;
+Links.model = Link;
 
-// module.exports = Links;
+module.exports = Links;
+END SOLUTION */

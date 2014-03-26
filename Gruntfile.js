@@ -44,7 +44,7 @@ module.exports = function(grunt) {
 
     jshint: {
       files: [
-        /* END SOLUTION */
+        /* START SOLUTION */
         'Gruntfile.js',
         'app/**/*.js',
         'public/**/*.js',
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
       files: {
         'public/dist/style.min.css': 'public/style.css'
       }
-      /* START SOLUTION */
+      /* END SOLUTION */
     },
 
     watch: {

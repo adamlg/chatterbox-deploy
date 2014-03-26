@@ -1,5 +1,6 @@
 var db = require('../config');
-var crypto = require('crypto')
+var crypto = require('crypto');
+/* START SOLUTION */
 var mongoose = require('mongoose');
 
 var linkSchema = mongoose.Schema({
@@ -19,8 +20,6 @@ var createSha = function(url) {
   return shasum.digest('hex').slice(0, 5);
 };
 
-
-
 linkSchema.pre('save', function(next){
   var code = createSha(this.url);
   this.code = code;
@@ -28,3 +27,26 @@ linkSchema.pre('save', function(next){
 });
 
 module.exports = Link;
+/* ELSE
+var Click = require('./click');
+
+var Link = db.Model.extend({
+  tableName: 'urls',
+  hasTimestamps: true,
+  defaults: {
+    visits: 0
+  },
+  clicks: function() {
+    return this.hasMany(Click);
+  },
+  initialize: function(){
+    this.on('creating', function(model, attrs, options){
+      var shasum = crypto.createHash('sha1');
+      shasum.update(model.get('url'));
+      model.set('code', shasum.digest('hex').slice(0, 5));
+    });
+  }
+});
+
+module.exports = Link;
+END SOLUTION */
