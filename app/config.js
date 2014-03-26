@@ -2,7 +2,8 @@ var Bookshelf = require('bookshelf');
 var path = require('path');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/shortlydb');
+mongoURI = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/shortlydb';
+mongoose.connect(mongoURI);
 
 // Run in seperate terminal window using 'mongod'
 var db = mongoose.connection;

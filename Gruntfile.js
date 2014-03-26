@@ -3,6 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      /* START SOLUTION */
       options: {
         separator: ';'
       },
@@ -10,6 +11,7 @@ module.exports = function(grunt) {
         src: ['public/client/**/*.js'],
         dest: 'public/dist/<%= pkg.name %>.js'
       }
+      /* END SOLUTION */
     },
 
     mochaTest: {
@@ -28,6 +30,7 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      /* START SOLUTION */
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
@@ -36,16 +39,21 @@ module.exports = function(grunt) {
           'public/dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
         }
       }
+      /* END SOLUTION */
     },
 
     jshint: {
       files: [
+        /* END SOLUTION */
         'Gruntfile.js',
         'app/**/*.js',
         'public/**/*.js',
         'lib/**/*.js',
         './*.js',
         'spec/**/*.js'
+        /* ELSE
+        // Add filespec list here
+        END SOLUTION */
       ],
       options: {
         force: 'true',
@@ -58,14 +66,14 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-      prod: {
-        options: {
-          keepSpecialComments: 0
-        },
-        files: {
-          'public/dist/style.min.css': 'public/style.css'
-        }
+      /* START SOLUTION */
+      options: {
+        keepSpecialComments: 0
+      },
+      files: {
+        'public/dist/style.min.css': 'public/style.css'
       }
+      /* START SOLUTION */
     },
 
     watch: {
@@ -87,12 +95,14 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        /* START SOLUTION */
         command: 'git push azure master',
         options: {
           stdout: true,
           stderr: true,
           failOnError: true
         }
+        /* END SOLUTION */
       }
     },
   });
@@ -117,30 +127,48 @@ module.exports = function(grunt) {
     nodemon.stderr.pipe(process.stderr);
 
     grunt.task.run([ 'watch' ]);
-
   });
 
+  ////////////////////////////////////////////////////
+  // Main grunt tasks
+  ////////////////////////////////////////////////////
+
   grunt.registerTask('test', [
+    /* START SOLUTION */
     'jshint',
+    /* END SOLUTION */
     'mochaTest'
   ]);
 
   grunt.registerTask('build', [
+    /* START SOLUTION */
     'concat',
     'uglify',
     'cssmin'
+    /* END SOLUTION */
   ]);
 
-  grunt.registerTask('build-dev', [
+  grunt.registerTask('upload', function(n) {
+    if(grunt.option('prod')) {
+      /* START SOLUTION */
+      grunt.task.run([ 'shell:prodServer' ]);
+      /* ELSE
+      // add your production server task here
+      END SOLUTION */
+    } else {
+      grunt.task.run([ 'server-dev' ]);
+    }
+  });
+
+  grunt.registerTask('deploy', [
+    /* START SOLUTION */
     'test',
     'build',
-    'server-dev'
+    'upload'
+    /* ELSE
+    // add your deploy tasks here
+    END SOLUTION */
   ]);
 
-  grunt.registerTask('build-prod', [
-    'test',
-    'build',
-    'shell:prodServer'
-  ]);
 
 };

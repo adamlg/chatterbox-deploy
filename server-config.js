@@ -125,7 +125,7 @@ var saveLink  = function(req, res) {
           }
         });
       })
-    };
+    }
   });
 };
 /* ELSE 
@@ -238,6 +238,7 @@ var createUser = function(req, res) {
 });
 END SOLUTION */
 
+<<<<<<< HEAD
 app.get('/', checkUser, function(req, res) {
   res.render('index');
 });
