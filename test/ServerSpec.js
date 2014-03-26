@@ -4,9 +4,7 @@ var expect = require('chai').expect;
 var app = require('../server-config.js');
 
 var db = require('../app/config');
-var Users = require('../app/collections/users');
 var User = require('../app/models/user');
-var Links = require('../app/collections/links');
 var Link = require('../app/models/link');
 
 

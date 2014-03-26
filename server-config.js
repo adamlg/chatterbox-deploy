@@ -1,19 +1,11 @@
 var express = require('express');
 var partials = require('express-partials');
-/* START SOLUTION */
-var util = require('./lib/utility.solution');
-/* ELSE
 var util = require('./lib/utility');
-END SOLUTION */
 
-var db = require('./app/config');
-var User = require('./app/models/user');
-var Link = require('./app/models/link');
 /* START SOLUTION */
+var handler = require('./lib/request-handler.solution');
 /* ELSE
-var Users = require('./app/collections/users');
-var Links = require('./app/collections/links');
-var Click = require('./app/models/click');
+var handler = require('./lib/request-handler');
 END SOLUTION */
 
 var app = express();
@@ -28,37 +20,19 @@ app.configure(function() {
   app.use(express.session());
 });
 
-app.get('/', util.checkUser, function(req, res) {
-  res.render('index');
-});
+app.get('/', util.checkUser, handler.renderIndex);
+app.get('/create', util.checkUser, handler.renderIndex);
 
-app.get('/create', util.checkUser, function(req, res) {
-  res.render('index');
-});
+app.get('/links', util.checkUser, handler.fetchLinks);
+app.post('/links', handler.saveLink);
 
-app.get('/links', util.checkUser, util.fetchLinks);
+app.get('/login', handler.loginUserForm);
+app.post('/login', handler.loginUser);
+app.get('/logout', handler.logoutUser);
 
-app.post('/links', util.saveLink);
+app.get('/signup', handler.signupUserForm);
+app.post('/signup', handler.signupUser);
 
-app.get('/login', function(req, res) {
-  res.render('login');
-});
-
-app.post('/login', util.loginUser);
-
-app.get('/logout', function(req, res) {
-  req.session.destroy(function(){
-    res.redirect('/login');
-  });
-});
-
-app.get('/signup', function(req, res) {
-  res.render('signup');
-});
-
-app.post('/signup', util.createUser);
-
-app.get('/*', util.navToLink);
-
+app.get('/*', handler.navToLink);
 
 module.exports = app;
