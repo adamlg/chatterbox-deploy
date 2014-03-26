@@ -70,8 +70,10 @@ module.exports = function(grunt) {
       options: {
         keepSpecialComments: 0
       },
-      files: {
-        'public/dist/style.min.css': 'public/style.css'
+      dist: {
+        files: {
+          'public/dist/style.min.css': 'public/style.css'
+        }
       }
       /* END SOLUTION */
     },
