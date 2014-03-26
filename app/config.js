@@ -1,18 +1,3 @@
-/* START SOLUTION */
-var mongoose = require('mongoose');
-
-mongoURI = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/shortlydb';
-mongoose.connect(mongoURI);
-
-// Run in seperate terminal window using 'mongod'
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
- console.log('Mongodb connection open');
-});
-
-module.exports = db;
-/* ELSE
 var Bookshelf = require('bookshelf');
 var path = require('path');
 
@@ -70,4 +55,3 @@ db.knex.schema.hasTable('users').then(function(exists) {
 });
 
 module.exports = db;
-END SOLUTION */
