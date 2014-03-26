@@ -44,15 +44,9 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 - Refactor `server.js` to use promises
   * [ ] Several routes in the server use nested callbacks. Refactor them all to use promises. Consider using[Bluebird](https://github.com/petkaantonov/bluebird), a popular and performant promise library.
 
-- Incorprate images in your shortened links
- * [ ] Find an image used on the site of the original url and use that instead of an icon (hint: use a regular expression or a [parser](http://stackoverflow.com/questions/7977945/html-parser-on-nodejs) to analyze the document)
-
 - Serve your pre-compiled JS files from a CDN:
  * [ ] Save your pre-compiled/processed JS files on [Azure's](http://www.windowsazure.com/en-us/documentation/articles/cdn-how-to-use/) content delivery network
  * [ ] Be sure to correctly reference your pre-compiled JS from your application - Hint: this is another development vs production environment issue
-
-- Use another service
- * [ ] Deploy your site to another service (Heroku, AWS)
 
 ### Nightmare Mode
 
@@ -60,3 +54,11 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
   * [ ] Refactor all HTML & templates to use correct paths to the CDN
   * [ ] Version your CDN build & manage [expiration](http://msdn.microsoft.com/en-us/library/gg680306.aspx)  of the files you store
   * [ ] Store saved images in the CDN (this might be very difficult)
+
+### Other Challenges
+
+- Incorprate images in your shortened links
+  * [ ] Find an image used on the site of the original url and use that instead of the generic icon (hint: use a regular expression or a [parser](http://stackoverflow.com/questions/7977945/html-parser-on-nodejs) to analyze the HTML document). How will you store this new information?
+
+- Use another cloud service
+ * [ ] Deploy your site to another service (Heroku, AWS)
