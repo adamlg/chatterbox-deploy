@@ -46,7 +46,7 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 ### Extra Credit
 
 - Refactor `server.js` to use promises
-  * [ ] Several routes in the server use nested callbacks. Refactor them all to use promises. Consider using[Bluebird](https://github.com/petkaantonov/bluebird), a popular and performant promise library.
+  * [ ] Several routes in the server use nested callbacks. Refactor them all to use promises. Consider using [Bluebird](https://github.com/petkaantonov/bluebird), a popular and performant promise library.
 
 - Serve your pre-compiled JS files from a CDN:
  * [ ] Save your pre-compiled/processed JS files on [Azure's](http://www.windowsazure.com/en-us/documentation/articles/cdn-how-to-use/) content delivery network
