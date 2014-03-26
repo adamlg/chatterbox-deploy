@@ -22,14 +22,14 @@ We're giving you a canonical version of the Shortly-express repo to start with. 
  * [ ] Deploy your code to Azure!
  * [ ] Read about [how to use node modules](http://www.windowsazure.com/en-us/documentation/articles/nodejs-use-node-modules-windows-azure-apps/) with Azure. Make any necessary changes.
 
-- Create a Gruntfile
-Building and deploying an app involves a number of important tasks that need to be performed in a certain order. When you're trying to rapidly prototype your app, this can become repetitive and is prone to error. Grunt is a super useful tool that can automate a wide variety of tasks for you. Let Grunt do the work!
+- Create a Gruntfile:
+ - **Note:** Building and deploying an app involves a number of important tasks that need to be performed in a certain order. When you're trying to rapidly prototype your app, this can become repetitive and is prone to error. Grunt is a super useful tool that can automate a wide variety of tasks for you. Let Grunt do the work!
  * [ ] Use [Grunt](http://gruntjs.com/) to create a build script
  * [ ] Concatenate files before deployment
  * [ ] Uglify your code using Grunt before deployment -- Don't forget to update your views to point to the minified versions of your asset files (CSS, JS)
  * [ ] Run jshint before deployment -- if jshint fails, the build process should exit
  * [ ] Run your Mocha tests before deployment -- if any tests fail, the build process should exit
- When you're done, you will have programmed a hierarchy of tasks that can be run with a single command. Run `grunt deploy` to build and host your app on a local dev server, and run `grunt deploy --prod` when you're ready to push up to the production server
+ * When you're done, you will have programmed a hierarchy of tasks that can be run with a single command. Run `grunt deploy` to build and host your app on a local dev server, and run `grunt deploy --prod` when you're ready to push up to the production server
 
 
 - Refactor your database
