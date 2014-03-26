@@ -18,40 +18,6 @@ app.configure(function() {
   app.use(express.session());
 });
 
-app.get('/', checkUser, function(req, res) {
-  res.render('index');
-});
-
-app.get('/create', checkUser, function(req, res) {
-  res.render('index');
-});
-
-app.get('/links', checkUser, function(req, res) {
-});
-
-app.post('/links', saveLink);
-
-app.get('/login', function(req, res) {
-  res.render('login');
-});
-
-app.post('/login', loginUser);
-
-app.get('/logout', function(req, res) {
-  req.session.destroy(function(){
-    res.redirect('/login');
-  });
-});
-
-app.get('/signup', function(req, res) {
-  res.render('signup');
-});
-
-app.post('/signup', createUser);
-
-app.get('/*', navToLink);
-
-
 var checkUser = function(req, res, next) {
   if (!util.isLoggedIn(req)) {
     res.redirect('/login');
@@ -272,6 +238,37 @@ var createUser = function(req, res) {
 });
 END SOLUTION */
 
+app.get('/', checkUser, function(req, res) {
+  res.render('index');
+});
+
+app.get('/create', checkUser, function(req, res) {
+  res.render('index');
+});
+
+app.get('/links', checkUser, fetchLinks);
+
+app.post('/links', saveLink);
+
+app.get('/login', function(req, res) {
+  res.render('login');
+});
+
+app.post('/login', loginUser);
+
+app.get('/logout', function(req, res) {
+  req.session.destroy(function(){
+    res.redirect('/login');
+  });
+});
+
+app.get('/signup', function(req, res) {
+  res.render('signup');
+});
+
+app.post('/signup', createUser);
+
+app.get('/*', navToLink);
 
 
 module.exports = app;
