@@ -13,7 +13,7 @@ var Link = require('../app/models/link');
 
 /* START SOLUTION */
 describe /* ELSE
-xdescribeEND SOLUTION */('', function() {
+xdescribe END SOLUTION */('', function() {
 
   beforeEach(function(done) {
     // Log out currently signed in user
