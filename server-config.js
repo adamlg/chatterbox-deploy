@@ -26,21 +26,74 @@ var checkUser = function(req, res, next) {
   }
 };
 
-app.get('/', checkUser, function(req, res) {
-  res.render('index');
-});
 
-app.get('/create', checkUser, function(req, res) {
-  res.render('index');
-});
+/* START SOLUTION */
+var loginUser = function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
 
-app.get('/links', checkUser, function(req, res) {
+  User.findOne({ username: username })
+    .exec(function(err,user) {
+      if (!user) {
+        res.redirect('/login');
+      } else {
+        var savedPassword = user.password;
+        User.comparePassword(password, savedPassword, function(err, match) {
+          if (match) {
+            util.createSession(app, req, res, user);
+          } else {
+            res.redirect('/login');
+          }
+        });
+      }
+  })
+};
+var createUser = function(req,res) {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  User.findOne({ username: username })
+    .exec(function(err, user) {
+      if (!user) {
+        var newUser = new User({
+          username: username,
+          password: password
+        });
+        newUser.save(function(err, newUser) {
+          if (err) {
+            res.send(500, err);
+          }
+          util.createSession(app, req, res, newUser);
+        });
+      } else {
+        console.log('Account already exists');
+        res.redirect('/signup');
+      }
+    });
+};
+
+var navToLink = function(req, res) {
+  Link.findOne({ code: req.params[0] }).exec(function(err,link) {
+    if (!link) {
+      res.redirect('/');
+    } else {
+      link.visits++;
+      link.save(function(err,link){
+        res.redirect(link.url);
+        return;
+      })
+    }
+  });
+};
+
+var fetchLinks = function(req,res) {
   Link.find({}).exec(function(err,links) {
     res.send(200, links);
   })
-});
+};
 
-app.post('/links', function(req, res) {
+
+var saveLink  = function(req, res) {
   var uri = req.body.url;
 
   if (!util.isValidUrl(uri)) {
@@ -74,33 +127,135 @@ app.post('/links', function(req, res) {
       })
     }
   });
-});
+};
+/* ELSE 
+
+var fetchLinks = function(req, res) {
+  Links.reset().fetch().then(function(links) {
+    res.send(200, links.models);
+  })
+};
+
+var createLink = function(req, res) {
+  var uri = req.body.url;
+
+  if (!util.isValidUrl(uri)) {
+    console.log('Not a valid url: ', uri);
+    return res.send(404);
+  }
+
+  new Link({ url: uri }).fetch().then(function(found) {
+    if (found) {
+      res.send(200, found.attributes);
+    } else {
+      util.getUrlTitle(uri, function(err, title) {
+        if (err) {
+          console.log('Error reading URL heading: ', err);
+          return res.send(404);
+        }
+
+        var link = new Link({
+          url: uri,
+          title: title,
+          base_url: req.headers.origin
+        });
+
+        link.save().then(function(newLink) {
+          Links.add(newLink);
+          res.send(200, newLink);
+        });
+      });
+    }
+  });
+};
 
 
-app.get('/login', function(req, res) {
-  res.render('login');
-});
+var navToLink = function(req, res) {
+  new Link({ code: req.params[0] }).fetch().then(function(link) {
+    if (!link) {
+      res.redirect('/');
+    } else {
+      var click = new Click({
+        link_id: link.get('id')
+      });
 
-app.post('/login', function(req, res) {
+      click.save().then(function() {
+        db.knex('urls')
+          .where('code', '=', link.get('code'))
+          .update({
+            visits: link.get('visits') + 1,
+          }).then(function() {
+            return res.redirect(link.get('url'));
+          });
+      });
+    }
+  });
+};
+
+var loginUser = function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
 
-  User.findOne({ username: username })
-    .exec(function(err,user) {
+  new User({ username: username })
+    .fetch()
+    .then(function(user) {
       if (!user) {
         res.redirect('/login');
       } else {
-        var savedPassword = user.password;
-        User.comparePassword(password, savedPassword, function(err, match) {
+        user.comparePassword(password, function(match) {
           if (match) {
             util.createSession(app, req, res, user);
           } else {
             res.redirect('/login');
           }
-        });
+        })
       }
   });
 });
+
+var createUser = function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  new User({ username: username })
+    .fetch()
+    .then(function(user) {
+      if (!user) {
+        var newUser = new User({
+          username: username,
+          password: password
+        });
+        newUser.save()
+          .then(function(newUser) {
+            util.createSession(app, req, res, newUser);
+            Users.add(newUser);
+          });
+      } else {
+        console.log('Account already exists');
+        res.redirect('/signup');
+      }
+    })
+});
+END SOLUTION */
+
+<<<<<<< HEAD
+app.get('/', checkUser, function(req, res) {
+  res.render('index');
+});
+
+app.get('/create', checkUser, function(req, res) {
+  res.render('index');
+});
+
+app.get('/links', checkUser, fetchLinks);
+
+app.post('/links', saveLink);
+
+app.get('/login', function(req, res) {
+  res.render('login');
+});
+
+app.post('/login', loginUser);
 
 app.get('/logout', function(req, res) {
   req.session.destroy(function(){
@@ -112,43 +267,9 @@ app.get('/signup', function(req, res) {
   res.render('signup');
 });
 
-app.post('/signup', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
+app.post('/signup', createUser);
 
-  User.findOne({ username: username })
-    .exec(function(err, user) {
-      if (!user) {
-        var newUser = new User({
-          username: username,
-          password: password
-        });
-        newUser.save(function(err, newUser) {
-          if (err) {
-            res.send(500, err);
-          }
-          util.createSession(app, req, res, newUser);
-        });
-      } else {
-        console.log('Account already exists');
-        res.redirect('/signup');
-      }
-    });
-});
+app.get('/*', navToLink);
 
-app.get('/*', function(req, res) {
-  Link.findOne({ code: req.params[0] }).exec(function(err,link) {
-    if (!link) {
-      res.redirect('/');
-    } else {
-      link.visits++;
-      link.save(function(err,link){
-        if(err){ console.log('LINK SAVE ERROR: ', err); }
-        res.redirect(link.url);
-        return;
-      })
-    }
-  });
-});
 
 module.exports = app;
