@@ -24,6 +24,7 @@ You will find all tests are in pending state. They are all written for MongoDB. 
 #### Reconfigure your app to work in both evironments
 
  * [ ] Inject any production configuration dependencies
+ * [ ] Set any necessary environment variables which will be accessed on `process.env`. Certain variables, such as the `PORT` that your production server is running on, will be populated by your server instance and should be handled accordingly.
 
 #### Deploy
 
