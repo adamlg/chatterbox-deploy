@@ -37,7 +37,7 @@ You will find all tests are in pending state. They are all written for MongoDB. 
 
  * [ ] Use [Grunt](http://gruntjs.com/) to create a build script
  * [ ] Concatenate files before deployment
- * [ ] Uglify your code using Grunt before deployment -- Don't forget to update your views to point to the minified versions of your asset files (CSS, JS)
+ * [ ] Uglify your code using Grunt before deployment -- Don't forget to update your views to point to the minified versions of your asset files in the public/dist folder (CSS, JS). The folder public/dist is already .gitignored for you, but make sure that you aren't committing your compiled scripts and CSS to your Github repo.
  * [ ] Run jshint before deployment -- if jshint fails, the build process should exit
  * [ ] Run your Mocha tests before deployment -- if any tests fail, the build process should exit
 
