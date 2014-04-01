@@ -33,7 +33,7 @@ You will find all tests are in pending state. They are all written for MongoDB. 
 
 #### Create a Gruntfile:
 
-**Note:** Building and deploying an app involves a number of important tasks that need to be performed in a certain order. When you're trying to rapidly prototype your app, this can become repetitive and is prone to error. Grunt is a super useful tool that can automate a wide variety of tasks for you. Let Grunt do the work!
+**Note:** Building and deploying an app involves a number of important tasks that need to be performed in a certain order. When you're trying to rapidly prototype your app, this can become repetitive and is prone to error. Grunt is a super useful tool that can automate a wide variety of tasks for you. Still not convinced? Read [this](http://24ways.org/2013/grunt-is-not-weird-and-hard/) article about the advantages of using Grunt. Let Grunt do the work!
 
  * [ ] Use [Grunt](http://gruntjs.com/) to create a build script
  * [ ] Concatenate files before deployment
