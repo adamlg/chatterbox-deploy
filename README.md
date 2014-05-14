@@ -79,7 +79,7 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 
 #### Setting up MongoDB on Azure
 
-Setting up MongoDB: In order to use Mongo on Azure, you'll need to add the MongoLab add-on to your account. Follow these steps:
+In order to use Mongo on Azure, you'll need to add the MongoLab add-on to your account. Follow these steps:
  1. Select your email address in the upper right corner, then choose “View my bill”
  2. Click “Add subscription”
  3. Select “Pay as you go”
