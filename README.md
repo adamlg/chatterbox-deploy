@@ -74,8 +74,21 @@ When you're done, you will have programmed a hierarchy of tasks that can be run 
 In the previous sprint, our shortened links were stored using sqlite, a server-less database engine. Sqlite is great for development, but it's not well suited for well-trafficked production sites for [various reasons](http://stackoverflow.com/questions/913067/sqlite-as-a-production-database-for-a-low-traffic-site).
 
   * [ ] Refactor the app to use MongoDB/Mongoose, and run it locally
-  * [ ] Host a Mongo instance on [Azure](http://www.windowsazure.com/en-us/documentation/articles/store-mongolab-web-sites-nodejs-store-data-mongodb/). *** Note: see below for help with this ****
+  * [ ] Follow the instructions below to host a MongoDB instance on [Azure](http://www.windowsazure.com/en-us/documentation/articles/store-mongolab-web-sites-nodejs-store-data-mongodb/). 
   * [ ] Refactor your database code to handle both enviroments--if you're running the app locally, it should connect to a local database, and when you navigate to your deployed site, it should connect to your hosted Mongo instance
+
+#### Setting up MongoDB on Azure
+
+Setting up MongoDB: In order to use Mongo on Azure, you'll need to add the MongoLab add-on to your account. Follow these steps:
+ 1. Select your email address in the upper right corner, then choose “View my bill”
+ 2. Click “Add subscription”
+ 3. Select “Pay as you go”
+ 4. Enter in your credit card, etc. **IF YOU FOLLOW THESE STEPS YOU WILL NOT BE CHARGED**
+ 5. Go back to the Management Portal and select "Subscriptions" on
+the top right, then check the "Pay-as-you-go" box.
+ 6. Return to the portal and select the Sandbox version of MongoLab.
+ 7. In the Subscription dropdown box, select the “Pay-as-you-go” subscription you just created.
+ 8. Back in the Azure portal, navigate to Add-Ons to search for and add MongoLab
 
 ## Extra Credit
 
@@ -104,16 +117,3 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 ### Use another cloud service
 
  * [ ] Deploy your site to another service (Heroku, AWS)
-
-### Azure Help
-
-- Setting up MongoDB: In order to use Mongo on Azure, you'll need to add the MongoLab add-on to your account. Follow these steps:
- 1. Select your email address in the upper right corner, then choose “View my bill”
- 2. Click “Add subscription”
- 3. Select “Pay as you go”
- 4. Enter in your credit card, etc. **IF YOU FOLLOW THESE STEPS YOU WILL NOT BE CHARGED**
- 5. Go back to the Management Portal and select "Subscriptions" on
-the top right, then check the "Pay-as-you-go" box.
- 6. Return to the portal and select the Sandbox version of MongoLab.
- 7. In the Subscription dropdown box, select the “Pay-as-you-go” subscription you just created.
- 8. Back in the Azure portal, navigate to Add-Ons to search for and add MongoLab
