@@ -29,7 +29,7 @@ You will find all tests are in pending state. They are all written for MongoDB. 
 
 ### Create and configure your server using the Azure CLI
 
-1. Install Azure-CLI: `npm install azure-cli`
+1. Install Azure-CLI: `npm install -g azure-cli`
 1. Connect to your Azure account
     1. Authenticate and download credentials: `azure account download`
     1. Install credentials: `azure account import <FILE_PATH>`
