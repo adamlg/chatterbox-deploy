@@ -13,7 +13,7 @@ You will find all tests are in pending state. They are all written for MongoDB. 
 
 ## Basic requirements
 
-## Get your code ready for deployment
+### Get your code ready for deployment
 
  * [ ] Fork the shortly-deploy repo
  * [ ] Prepare your code for publication using [Liberator](https://github.com/hackreactor/curriculum/wiki/Publicizing-Your-Hack-Reactor-Repositories)
@@ -80,15 +80,20 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 #### Setting up MongoDB on Azure
 
 In order to use Mongo on Azure, you'll need to add the MongoLab add-on to your account. Follow these steps:
- 1. Select your email address in the upper right corner, then choose “View my bill”
- 2. Click “Add subscription”
- 3. Select “Pay as you go”
- 4. Enter in your credit card, etc. **IF YOU FOLLOW THESE STEPS YOU WILL NOT BE CHARGED**
- 5. Go back to the Management Portal and select "Subscriptions" on
-the top right, then check the "Pay-as-you-go" box.
- 6. Return to the portal and select the Sandbox version of MongoLab.
- 7. In the Subscription dropdown box, select the “Pay-as-you-go” subscription you just created.
- 8. Back in the Azure portal, navigate to Add-Ons to search for and add MongoLab
+
+  1. Select your email address in the upper right corner, then choose “View my bill”
+  1. Click “Add subscription”
+  1. Select “Pay as you go”
+  1. Enter in your credit card, etc. IF YOU FOLLOW THESE STEPS YOU WILL NOT BE CHARGED
+  1. Go back to the Management Portal and select "Subscriptions" on the top right, then make sure the “Pay-As-You-Go” box is checked. (You may need to refresh the Management Portal tab for it to appear)
+  1. Click the “+ NEW” button in the lower left
+  1. Click on “Store”
+  1. Click on “MongoLab” and then the arrow in the lower right of the dialog
+  1. Make sure “Sandbox” is checked in the order form
+  1. Select “Pay-As-You-Go” from the subscription drop-down menu
+  1. Continue checking out. You will not be charged (make sure the cost is $0.00/month before confirming)
+  1. Back in the Azure portal, navigate to Add-Ons
+  1. Select MongoLab and then click “Connection Info” in the bottom bar to get the MongoDB URI for accessing your database
 
 ## Extra Credit
 
