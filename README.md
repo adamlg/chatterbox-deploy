@@ -50,6 +50,7 @@ You will find all tests are in pending state. They are all written for MongoDB. 
 1. Scale your site so it can handle the deployment process: `azure site scale mode standard <SITE_NAME>`
 1. Deploy your repo to Azure by pushing to the new remote 'azure': `git push azure`
 1. Log the output of your site as it deploys to track errors: `azure site log tail <SITE_NAME>`
+  - **Note:** If viewing the logs isn't enough for you, you can try this too (note that this should not be needed. It's provided here as a potentially usefull tip for the future). If your website is named foo.azurewebsites.net, try going to http://foo.scm.azurewebsites.net.  Your login credentials will be your Git/FTP username and password.  Once in, you’ll be able to open a PowerShell prompt, see running processes, download a diagnostics dump, and more. More info here: https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service.
 1. After the deployment finishes, check to make sure your site is running: `azure site browse`
 1. __CRITICAL:__ Scale your site back down now that deployment is finished: `azure site scale mode free <SITE_NAME>`
   - If you don't do this, you're server will remain at a high SLA tier and will cost you ~$70/month of your free BizSpark credits.
