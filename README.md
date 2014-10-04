@@ -39,11 +39,11 @@ You will find all tests are in pending state. They are all written for MongoDB. 
 1. Create a new website on Azure (within your repo dir): `azure site create <NAME_OF_SITE> --git`
   - This adds a new remote to your repo named, 'azure'. Confirm this with `git remote -v`
   - __NOTE:__ You will likely need use the web-interface to reset your deployment credentials for the specific site you just created at this point
-1. View the environmental variables set for your server: `azure site config list <SITE_NAME>`
-1. Add ENVIRONMENTAL variables to your site so that your node server can access them dynamically: `azure site config add <KEY>=<VALUE>`  
- - As in: `azure site config add NODE_ENV=production`
-1. If you need to delete ENVIRONMENTAL variables: `site config clear <KEY>` 
- - As in:`site config clear NODE_ENV`
+1. View the environmental variables set for your server: `azure site appsetting list <SITE_NAME>`
+1. Add ENVIRONMENTAL variables to your site so that your node server can access them dynamically: `azure site appsetting add <KEY>=<VALUE>`  
+ - As in: `azure site appsetting add NODE_ENV=production`
+1. If you need to delete ENVIRONMENTAL variables: `site appsetting clear <KEY>` 
+ - As in:`site appsetting clear NODE_ENV`
 
 ### Deploy your code to your server using the Azure CLI
 
