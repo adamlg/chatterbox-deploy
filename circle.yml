@@ -1,0 +1,13 @@
+machine:
+  environment:
+    DOWNSTREAM: hackreactor/shortly-deploy
+dependencies:
+  pre:
+    - npm install -g hackreactor-labs/problemify
+    - git clone git@github.com:hackreactor-labs/scripts.git ../scripts
+deployment:
+  master:
+    branch: master
+    commands:
+      - ../scripts/circle-ci/deploy/checkout-latest-tag.sh
+      - ../scripts/circle-ci/deploy/publish-to-hackreactor.sh
