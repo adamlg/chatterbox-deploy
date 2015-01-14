@@ -16,7 +16,7 @@ You will find all tests are in pending state. They are all written for MongoDB. 
 ### Get your code ready for deployment
 
  * [ ] Fork the shortly-deploy repo
- * [ ] Prepare your code for publication using [Liberator](https://github.com/hackreactor/curriculum/wiki/Publicizing-Your-Hack-Reactor-Repositories)
+ * [ ] Prepare your code for publication using [Liberator](https://github.com/hackreactor/liberator)
 
 ## Deployment
 
