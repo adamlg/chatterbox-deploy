@@ -65,4 +65,4 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 
 ### Use another cloud service
 
- * [ ] Deploy your site to another service such as AWS. AWS has a staffed (both with food and with people!) [popup location](https://aws.amazon.com/blogs/aws/aws-popup-loft-in-san-francisco/) that is open to the public. Their staff are available to help you with AWS related issues
+ * [ ] Deploy your site to another service such as AWS. In San Francisco, AWS has a staffed (both with food and with people!) [popup location](https://aws.amazon.com/blogs/aws/aws-popup-loft-in-san-francisco/) that is open to the public. Their staff are available to help you with AWS related issues
