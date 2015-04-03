@@ -27,7 +27,7 @@ We're giving you a canonical version of the Shortly-express repo to start with. 
  * [ ] Run jshint before deployment -- if jshint fails, the build process should exit
  * [ ] Run your Mocha tests before deployment -- if any tests fail, the build process should exit
 
-When you're done, you will have programmed a hierarchy of tasks that can be run with a single command. Run `grunt deploy` to build and host your app on a local dev server, and run `grunt deploy --prod` when you're ready to push up to the production server (Heroku)
+When you're done, you will have programmed a hierarchy of tasks that can be run with a single command. Run `grunt deploy` to build and host your app on a local dev server, and run `grunt deploy --prod` when you're ready to push up to the production server (Heroku).
 
 
 ## Extra Credit
@@ -36,17 +36,17 @@ When you're done, you will have programmed a hierarchy of tasks that can be run 
 
 In the previous sprint, our shortened links were stored using sqlite, a server-less database engine. Sqlite is great for development, but it's not well suited for well-trafficked production sites for [various reasons](http://stackoverflow.com/questions/913067/sqlite-as-a-production-database-for-a-low-traffic-site). You will find all tests are in pending state. They are all written for MongoDB. Before starting on your mongo refactor, remove 'x' from each describe block.
 
-  * [ ] Refactor the app to use MongoDB/Mongoose, and run it locally. A lot of the code written in Shortly-Angular can be used in this sprint. 
-  * [ ] Normally you would need to go to MongoLab to setup a free MongoDB account, but that requires a credit card to signup. Instead, use this link for your database `mongodb://home:test@ds059821.mongolab.com:59821/heroku_app35427496`
+  * [ ] Refactor the app to use MongoDB/Mongoose, and run it locally. A lot of the code written in Shortly-Angular can be used in this sprint
+  * [ ] Normally you would need to go to MongoLab to setup a free MongoDB account, but that requires a credit card to signup. Instead, use this link for your database: `mongodb://home:test@ds059821.mongolab.com:59821/heroku_app35427496`
   * [ ] Refactor your database code to handle both environments--if you're running the app locally, it should connect to a local database, and when you navigate to your deployed site, it should connect to your hosted Mongo instance
 
 
 ### Refactor `server.js` to use promises
 
-  * [ ] Several routes in the server use nested callbacks. Refactor them all to use promises. Consider using [Bluebird](https://github.com/petkaantonov/bluebird), a popular and performant promise library.
+  * [ ] Several routes in the server use nested callbacks. Refactor them all to use promises. Consider using [Bluebird](https://github.com/petkaantonov/bluebird), a popular and performant promise library
 
 ### Use Grunt to deploy your concatenated and minified project onto Heroku
- * [ ] Follow the instructions on [here] (https://github.com/mbuchetics/heroku-buildpack-nodejs-grunt) to get your Heroku server to recognize and run your Grunt files. 
+ * [ ] Follow the instructions on [here] (https://github.com/mbuchetics/heroku-buildpack-nodejs-grunt) to get your Heroku server to recognize and run your Grunt files
 
 ### Deploy Chatterbox onto Heroku
  * [ ] Concat and minify the Chatterbox-Client and Chatterbox-Server and deploy that onto Heroku
@@ -55,7 +55,6 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 
   * [ ] Figure out how to push your latest build to the CDN
   * [ ] Refactor all HTML & templates to use correct paths to the CDN
-  * [ ] Version your CDN build & manage [expiration](http://msdn.microsoft.com/en-us/library/gg680306.aspx)  of the files you store
 
 ### Other Challenges
 
@@ -66,4 +65,4 @@ In the previous sprint, our shortened links were stored using sqlite, a server-l
 
 ### Use another cloud service
 
- * [ ] Deploy your site to another service such as AWS. AWS has a staffed (both with food and with people!) [popup location](https://aws.amazon.com/blogs/aws/aws-popup-loft-in-san-francisco/) that is open to the public. Their staff are available to help you with AWS related issues. 
+ * [ ] Deploy your site to another service such as AWS. AWS has a staffed (both with food and with people!) [popup location](https://aws.amazon.com/blogs/aws/aws-popup-loft-in-san-francisco/) that is open to the public. Their staff are available to help you with AWS related issues
