@@ -32,7 +32,7 @@ When you're done, you will have programmed a hierarchy of tasks that can be run 
 
 ## Build and deploy a personal website
 
-A personal website is great for your brand. It does not need to be overly fancy, but should showcase some of your front end abilities as a software engineer. You can use a service like [Namecheap](http://www.namecheap.com) to register a cheap personal domain. Your website should include the following:
+A personal website is great for your brand. It does not need to be overly fancy, but should showcase some of your front end abilities as a software engineer. **OPTIONAL**: You can use a service like [Namecheap](http://www.namecheap.com) to register a cheap personal domain. Your website should include the following:
 
   * [ ] Your contact information
   * [ ] A link to your Github page
