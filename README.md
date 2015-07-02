@@ -40,10 +40,10 @@ Putting code into different files will make it easier for people to work indepen
 
 ### Read more about Gulp vs. Grunt, and using NPM
 You've actually used build tools before: notably, whenever you run NPM test (look at your package.json file).  There are also many other task runners available: Gulp, Broccoli, etc.  Learn about them and experiment with re-factoring your code to use one (or more) of these task runners.  Which one(s) do you prefer, and why?  Here are some places to get started:
-[Grunt vs. Gulp](http://sixrevisions.com/web-development/grunt-vs-gulp/)
-[Getting started with Gulp.js](http://www.hongkiat.com/blog/getting-started-with-gulp-js/)
-[Using NPM as a build tool](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/)
-[Should you use a build tool at all?](http://blog.keithcirkel.co.uk/why-we-should-stop-using-grunt/)
+* [Grunt vs. Gulp](http://sixrevisions.com/web-development/grunt-vs-gulp/)
+* [Getting started with Gulp.js](http://www.hongkiat.com/blog/getting-started-with-gulp-js/)
+* [Using NPM as a build tool](http://blog.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/)
+* [Should you use a build tool at all?](http://blog.keithcirkel.co.uk/why-we-should-stop-using-grunt/)
 
 ### Separate dev dependencies from regular dependences, and see how Heroku treats everything differently
 Learn about the differences between dev dependencies and regular dependencies in your package.json file, and watch the Heroku build log to see why we might use both.
