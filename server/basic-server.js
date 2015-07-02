@@ -1,6 +1,6 @@
 /* Import node's http module: */
 var http = require("http");
-/* START SOLUTION */
+/* START SOLUTION  */
 var messages = require('./request-handler.solution');
 var utils = require('./utils.solution');
 var url = require('url');
