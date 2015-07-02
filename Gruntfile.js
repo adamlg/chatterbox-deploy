@@ -92,7 +92,13 @@ module.exports = function(grunt) {
       css: {
         files: 'client/styles/*.css',
         tasks: ['cssmin']
+      }/* START SOLUTION */,
+      server: {
+        files: 'server/*.js',
+        tasks: ['mochaTest']
       }
+      
+      /* END SOLUTION */
     },
 
     // shell: {
