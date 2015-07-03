@@ -1,11 +1,6 @@
-// YOUR CODE HERE:
-/* START SOLUTION */
 var app;
 $(function() {
   app = {
-//TODO: The current 'addFriend' function just adds the class 'friend'
-//more comments
-//to all messages sent by the user
     server: 'https://api.parse.com/1/classes/chatterbox/',
     username: 'anonymous',
     roomname: 'lobby',
@@ -232,4 +227,3 @@ $(function() {
     }
   };
 }());
-/* END SOLUTION */
