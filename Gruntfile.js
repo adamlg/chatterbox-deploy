@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
@@ -47,20 +46,14 @@ module.exports = function(grunt) {
         /* START SOLUTION */
         'Gruntfile.js',
         'client/**/*.js'
-        // 'public/**/*.js',
-        // 'lib/**/*.js',
-        // './*.js',
-        // 'spec/**/*.js'
-        /* ELSE
-        // Add filespec list here
-        END SOLUTION */
       ],
       options: {
-        force: 'true',
+        // force: 'true',
         jshintrc: '.jshintrc',
         ignores: [
           // 'public/lib/**/*.js',
-          'dist/client/*.js'
+          'dist/client/*.js',
+          'client/bower_components/**/*.js'
         ]
       }
     },
@@ -155,7 +148,8 @@ module.exports = function(grunt) {
     'uglify',
     'cssmin'
     /* END SOLUTION */
-  ]);
+  ]
+  );
 
   // grunt.registerTask('upload', function(n) {
   //   if(grunt.option('prod')) {
