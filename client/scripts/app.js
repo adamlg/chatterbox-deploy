@@ -1,4 +1,5 @@
 var app;
+
 $(function() {
   app = {
     server: 'https://api.parse.com/1/classes/chatterbox/',
